@@ -113,7 +113,7 @@ Acceso: editable por usuario y admin.
 
 ---
 
-## Modulo 4b — Logros `components/achievements/`
+## Modulo 5 — Logros `components/achievements/`
 
 | Archivo | Estado | Descripcion |
 |---------|--------|-------------|
@@ -125,7 +125,7 @@ Acceso: editable por usuario y admin.
 
 ---
 
-## Modulo 5 — UI Global / Shared `components/shared/`
+## Modulo 6 — UI Global / Shared `components/shared/`
 
 | Archivo | Estado | Descripcion |
 |---------|--------|-------------|

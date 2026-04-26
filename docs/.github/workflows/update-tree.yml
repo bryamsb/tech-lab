@@ -19,51 +19,13 @@ jobs:
       - name: Install tree
         run: sudo apt-get install -y tree
 
-      - name: Generate component tree
-        id: tree
-        run: |
-          TREE=$(tree src/components --noreport -F 2>/dev/null || echo "(sin archivos aun)")
-          echo "TREE<<EOF" >> $GITHUB_OUTPUT
-          echo "$TREE" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Update MODULES.md
-        run: |
-          TREE="${{ steps.tree.outputs.TREE }}"
-          DATE=$(date -u +"%Y-%m-%d %H:%M UTC")
-
-          # Reemplazar bloque entre marcadores
-          python3 - <<'PYEOF'
-          import re, os
-
-          tree = os.environ.get("COMPONENT_TREE", "")
-          date = os.environ.get("BUILD_DATE", "")
-
-          with open("MODULES.md", "r") as f:
-              content = f.read()
-
-          new_block = f"<!-- TREE:START -->\n_Actualizado: {date}_\n\n```\n{tree}\n```\n<!-- TREE:END -->"
-
-          updated = re.sub(
-              r"<!-- TREE:START -->.*?<!-- TREE:END -->",
-              new_block,
-              content,
-              flags=re.DOTALL
-          )
-
-          with open("MODULES.md", "w") as f:
-              f.write(updated)
-          PYEOF
-        env:
-          COMPONENT_TREE: ${{ steps.tree.outputs.TREE }}
-          BUILD_DATE: ${{ steps.tree.outputs.DATE }}
-
-      - name: Update index.html tree section
+      - name: Update MODULES.md and index.html
         run: |
           python3 - <<'PYEOF'
-          import re, os, subprocess
+          import subprocess, re
           from datetime import datetime, timezone
 
+          # Generar árbol
           result = subprocess.run(
               ["tree", "src/components", "--noreport", "-F"],
               capture_output=True, text=True
@@ -71,23 +33,42 @@ jobs:
           tree = result.stdout.strip() if result.returncode == 0 else "(sin archivos aun)"
           date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
-          # Escapar para HTML
-          tree_html = tree.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+          # --- Actualizar MODULES.md ---
+          new_md = f"<!-- TREE:START -->\n_Actualizado: {date}_\n\n```\n{tree}\n```\n<!-- TREE:END -->"
 
-          new_block = f'<!-- TREE:START -->\n<p class="tree-date">Actualizado: {date}</p>\n<pre class="tree-output">{tree_html}</pre>\n<!-- TREE:END -->'
+          with open("MODULES.md", "r") as f:
+              content = f.read()
+
+          updated = re.sub(
+              r"<!-- TREE:START -->.*?<!-- TREE:END -->",
+              new_md,
+              content,
+              flags=re.DOTALL
+          )
+
+          with open("MODULES.md", "w") as f:
+              f.write(updated)
+
+          print("MODULES.md actualizado")
+
+          # --- Actualizar index.html ---
+          tree_html = tree.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+          new_html = f'<!-- TREE:START -->\n<p class="tree-date">Actualizado: {date}</p>\n<pre class="tree-output">{tree_html}</pre>\n<!-- TREE:END -->'
 
           with open("index.html", "r") as f:
               content = f.read()
 
           updated = re.sub(
               r"<!-- TREE:START -->.*?<!-- TREE:END -->",
-              new_block,
+              new_html,
               content,
               flags=re.DOTALL
           )
 
           with open("index.html", "w") as f:
               f.write(updated)
+
+          print("index.html actualizado")
           PYEOF
 
       - name: Commit updated files

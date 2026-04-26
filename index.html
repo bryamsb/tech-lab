@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tech-lab — estructura del repo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --border: #1e2330;
+    --amber: #f0a500;
+    --amber-dim: #7a5200;
+    --coral: #e05a3a;
+    --coral-dim: #6b2a1a;
+    --green: #2dba72;
+    --green-dim: #0f4a2a;
+    --teal: #1ab8a0;
+    --teal-dim: #065048;
+    --text: #e8e4d8;
+    --muted: #6b6f7d;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Syne', sans-serif;
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .repo-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  h1 span { color: var(--amber); }
+
+  .subtitle {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .diagram {
+    width: 100%;
+    max-width: 860px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hint {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    letter-spacing: 0.08em;
+    margin-bottom: -4px;
+  }
+
+  .hint::before { content: '↗ '; }
+
+  a.block {
+    display: block;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 18px 24px;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  a.block::after {
+    content: '→';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    font-size: 16px;
+  }
+
+  a.block:hover { transform: translateY(-2px); }
+  a.block:hover::after { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+  .block-path {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .block-desc {
+    font-family: var(--mono);
+    font-size: 11px;
+    opacity: 0.65;
+    line-height: 1.5;
+  }
+
+  .block-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .row { display: grid; gap: 12px; }
+  .row-3 { grid-template-columns: repeat(3, 1fr); }
+  .row-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .amber-block {
+    background: #1a1400;
+    border-color: var(--amber-dim);
+    color: var(--amber);
+  }
+  .amber-block:hover { background: #221a00; border-color: var(--amber); }
+  .amber-block .block-tag { background: var(--amber-dim); color: var(--amber); }
+  .amber-block::after { color: var(--amber); }
+
+  .coral-block {
+    background: #180a06;
+    border-color: var(--coral-dim);
+    color: var(--coral);
+  }
+  .coral-block:hover { background: #200e08; border-color: var(--coral); }
+  .coral-block .block-tag { background: var(--coral-dim); color: var(--coral); }
+  .coral-block::after { color: var(--coral); }
+
+  .green-block {
+    background: #060f09;
+    border-color: var(--green-dim);
+    color: var(--green);
+  }
+  .green-block:hover { background: #091510; border-color: var(--green); }
+  .green-block .block-tag { background: var(--green-dim); color: var(--green); }
+  .green-block::after { color: var(--green); }
+
+  .teal-block {
+    background: #030e0d;
+    border-color: var(--teal-dim);
+    color: var(--teal);
+  }
+  .teal-block:hover { background: #051411; border-color: var(--teal); }
+  .teal-block .block-tag { background: var(--teal-dim); color: var(--teal); }
+  .teal-block::after { color: var(--teal); }
+
+  .connector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .connector-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  footer {
+    margin-top: 64px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--amber); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .diagram > *, .diagram .row > * {
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .diagram > *:nth-child(1) { animation-delay: 0.05s; }
+  .diagram > *:nth-child(2) { animation-delay: 0.12s; }
+  .diagram > *:nth-child(3) { animation-delay: 0.20s; }
+  .diagram > *:nth-child(4) .block:nth-child(1) { animation-delay: 0.28s; }
+  .diagram > *:nth-child(4) .block:nth-child(2) { animation-delay: 0.32s; }
+  .diagram > *:nth-child(4) .block:nth-child(3) { animation-delay: 0.36s; }
+  .diagram > *:nth-child(6) .block:nth-child(1) { animation-delay: 0.40s; }
+  .diagram > *:nth-child(6) .block:nth-child(2) { animation-delay: 0.44s; }
+  .diagram > *:nth-child(6) .block:nth-child(3) { animation-delay: 0.48s; }
+
+  @media (max-width: 600px) {
+    .row-3, .row-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span>tech-lab</span></h1>
+</header>
+
+<div class="diagram">
+
+  <a class="block amber-block" href="https://github.com/bryamsb/tech-lab/tree/main/src" target="_blank">
+    <div class="block-path">src/</div>
+    <div class="block-desc"></div>
+    <span class="block-tag">root</span>
+  </a>
+
+  <a class="block coral-block" href="https://github.com/bryamsb/tech-lab/tree/main/src/app" target="_blank">
+    <div class="block-path">app/ — rutas Next.js</div>
+    <div class="block-desc"></div>
+    <span class="block-tag">rutas</span>
+  </a>
+
+  <div class="connector">
+    <div class="connector-line"></div>
+    <span>components/</span>
+    <div class="connector-line"></div>
+  </div>
+
+  <div class="row row-3">
+    <a class="block green-block" href="https://github.com/bryamsb/tech-lab/tree/main/src/components/profile" target="_blank">
+      <div class="block-path">components/profile/</div>
+      <div class="block-desc">EditProfileButton, EditProfileModal, ProfilePage</div>
+      <span class="block-tag">Módulo 1 — perfil</span>
+    </a>
+    <a class="block green-block" href="https://github.com/bryamsb/tech-lab/tree/main/src/components/researchers" target="_blank">
+      <div class="block-path">components/researchers/</div>
+      <div class="block-desc">Modales de edición, creación, eliminación y asignación</div>
+      <span class="block-tag">Módulo 2 — investigadores</span>
+    </a>
+    <a class="block green-block" href="https://github.com/bryamsb/tech-lab/tree/main/src/components/projects" target="_blank">
+      <div class="block-path">components/projects/</div>
+      <div class="block-desc">ProjectModals, ProjectDetailPage, DeleteProjectConfirm</div>
+      <span class="block-tag">Módulo 3 — proyectos</span>
+    </a>
+  </div>
+
+  <div class="row row-3">
+    <a class="block teal-block" href="https://github.com/bryamsb/tech-lab/tree/main/src/components/publications" target="_blank">
+      <div class="block-path">components/publications/</div>
+      <div class="block-desc">PublicationsManager — lista, crea, edita y elimina</div>
+      <span class="block-tag">Módulo 4 — publicaciones</span>
+    </a>
+    <a class="block teal-block" href="https://github.com/bryamsb/tech-lab/tree/main/src/components/achievements" target="_blank">
+      <div class="block-path">components/achievements/</div>
+      <div class="block-desc">AchievementsManager — lista, crea, edita y elimina</div>
+      <span class="block-tag">Módulo 5 — logros</span>
+    </a>
+    <a class="block teal-block" href="https://github.com/bryamsb/tech-lab/tree/main/src/components/shared" target="_blank">
+      <div class="block-path">components/shared/</div>
+      <div class="block-desc">Modal, Header, Footer — componentes globales</div>
+      <span class="block-tag">Módulo 6 — UI global</span>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="https://github.com/bryamsb/tech-lab" target="_blank">github.com/bryamsb/tech-lab</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/bryamsb/tech-lab/blob/main/README.md" target="_blank">ver README</a>
+  </p>
+  <p style="margin-top:8px">Estructura objetivo del repo — Next.js + Supabase</p>
+</footer>
+
+</body>
+</html>

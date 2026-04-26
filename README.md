@@ -1,5 +1,7 @@
 # OTI UNI Tech Lab Platform
 
+> [Ver estructura interactiva de componentes →](https://bryamsb.github.io/tech-lab)
+
 Plataforma web para la gestion del laboratorio tecnologico OTI UNI. La app centraliza inventario, prestamos, proyectos, investigadores, tecnologias, dispositivos y visualizaciones interactivas en una sola interfaz construida con Next.js.
 
 ## Estado Actual
@@ -170,11 +172,34 @@ tech-lab/
 │   │   ├── researchers/
 │   │   └── technologies/
 │   ├── components/
+│   │   ├── profile/          # Módulo 1 — perfil
+│   │   ├── researchers/      # Módulo 2 — investigadores
+│   │   ├── projects/         # Módulo 3 — proyectos
+│   │   ├── publications/     # Módulo 4 — publicaciones (nuevo)
+│   │   ├── achievements/     # Módulo 5 — logros (nuevo)
+│   │   └── shared/           # Módulo 6 — UI global
 │   ├── contexts/
 │   ├── hooks/
 │   └── lib/
 └── supabase/
 ```
+
+### Modulos de components/
+
+### Modulos de components/
+
+| Carpeta | Modulo |
+|---------|--------|
+| `components/profile/` | Modulo 1 — perfil |
+| `components/researchers/` | Modulo 2 — investigadores |
+| `components/projects/` | Modulo 3 — proyectos |
+| `components/publications/` | Modulo 4 — publicaciones |
+| `components/achievements/` | Modulo 4b — logros |
+| `components/shared/` | Modulo 5 — UI global |
+
+Ver diagrama interactivo: [bryamsb.github.io/tech-lab](https://bryamsb.github.io/tech-lab)
+
+Detalle de archivos pendientes por modulo: [docs/MODULES.md](docs/MODULES.md)
 
 ## Instalacion Local
 

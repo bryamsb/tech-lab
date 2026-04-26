@@ -172,12 +172,12 @@ tech-lab/
 │   │   ├── researchers/
 │   │   └── technologies/
 │   ├── components/
-│   │   ├── profile/          # Módulo 1 — perfil
-│   │   ├── researchers/      # Módulo 2 — investigadores
-│   │   ├── projects/         # Módulo 3 — proyectos
-│   │   ├── publications/     # Módulo 4 — publicaciones (nuevo)
-│   │   ├── achievements/     # Módulo 5 — logros (nuevo)
-│   │   └── shared/           # Módulo 6 — UI global
+│   │   ├── profile/          
+│   │   ├── researchers/      
+│   │   ├── projects/         
+│   │   ├── publications/     
+│   │   ├── achievements/     
+│   │   └── shared/           
 │   ├── contexts/
 │   ├── hooks/
 │   └── lib/
@@ -194,8 +194,8 @@ tech-lab/
 | `components/researchers/` | Modulo 2 — investigadores |
 | `components/projects/` | Modulo 3 — proyectos |
 | `components/publications/` | Modulo 4 — publicaciones |
-| `components/achievements/` | Modulo 4b — logros |
-| `components/shared/` | Modulo 5 — UI global |
+| `components/achievements/` | Modulo 5 — logros |
+| `components/shared/` | Modulo 6 — UI global |
 
 Ver diagrama interactivo: [bryamsb.github.io/tech-lab](https://bryamsb.github.io/tech-lab)
 

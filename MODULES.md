@@ -1,6 +1,6 @@
 # Modulos — trabajo en curso
 
-Detalle de archivos a crear, mover o editar por modulo. Cuando un modulo este completo, se elimina su seccion de este archivo.
+Detalle de archivos a crear, mover o editar por modulo.
 
 Diagrama interactivo con links a cada carpeta: [bryamsb.github.io/tech-lab](https://bryamsb.github.io/tech-lab)
 

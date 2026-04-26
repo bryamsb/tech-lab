@@ -199,7 +199,7 @@ tech-lab/
 
 Ver diagrama interactivo: [bryamsb.github.io/tech-lab](https://bryamsb.github.io/tech-lab)
 
-Detalle de archivos pendientes por modulo: [docs/MODULES.md](docs/MODULES.md)
+Detalle de archivos pendientes por modulo: [MODULES.md](MODULES.md)
 
 ## Instalacion Local
 

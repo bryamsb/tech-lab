@@ -4,6 +4,17 @@ Detalle de archivos a crear, mover o editar por modulo. Cuando un modulo este co
 
 Diagrama interactivo con links a cada carpeta: [bryamsb.github.io/tech-lab](https://bryamsb.github.io/tech-lab)
 
+## Arbol actual de components/
+
+<!-- TREE:START -->
+_Se actualizará automáticamente con cada push a main_
+
+```
+src/components/
+(sin archivos aun)
+```
+<!-- TREE:END -->
+
 ## Notacion
 
 | Simbolo | Significado |
@@ -68,7 +79,7 @@ Acceso: editable por usuario y admin.
 
 ---
 
-## Modulo 5 — Logros `components/achievements/`
+## Modulo 4b — Logros `components/achievements/`
 
 | Archivo | Estado | Descripcion |
 |---------|--------|-------------|
@@ -80,7 +91,7 @@ Acceso: editable por usuario y admin.
 
 ---
 
-## Modulo 6 — UI Global / Shared `components/shared/`
+## Modulo 5 — UI Global / Shared `components/shared/`
 
 | Archivo | Estado | Descripcion |
 |---------|--------|-------------|

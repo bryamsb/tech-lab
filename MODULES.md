@@ -7,11 +7,45 @@ Diagrama interactivo con links a cada carpeta: [bryamsb.github.io/tech-lab](http
 ## Arbol actual de components/
 
 <!-- TREE:START -->
-_Se actualizará automáticamente con cada push a main_
+_Actualizado: 2026-04-26 10:07 UTC_
 
 ```
 src/components/
-(sin archivos aun)
+├── AirQualityViewer.tsx
+├── AuthAwareLink.tsx
+├── AuthGate.tsx
+├── BlockchainViewer.tsx
+├── DevicesAdminPage.tsx
+├── EditResearcherModal.tsx
+├── Footer.tsx
+├── Header.tsx
+├── LoRaSensorViewer.tsx
+├── LoansCalendar.tsx
+├── Modal.tsx
+├── Model3DViewer.tsx
+├── PeopleCounterViewer.tsx
+├── ProjectDeviceExperience.tsx
+├── ProjectModals.tsx
+├── ProtectedRoute.tsx
+├── RelatedTechnologies.tsx
+├── ResearcherModals.tsx
+├── SearchBar.tsx
+├── SmartParkingViewer.tsx
+├── TechLabPlatformViewer.tsx
+├── ThemeToggle.tsx
+├── achievements/
+│   └── test.tsx
+├── index.ts
+├── profile/
+│   └── test2.tsx
+├── projects/
+│   └── test3.tsx
+├── publications/
+│   └── test4.jsx
+├── researchers/
+│   └── test5.tsx
+└── shared/
+    └── test6.tsx
 ```
 <!-- TREE:END -->
 

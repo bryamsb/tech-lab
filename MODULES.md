@@ -7,7 +7,7 @@ Diagrama interactivo con links a cada carpeta: [bryamsb.github.io/tech-lab](http
 ## Arbol actual de components/
 
 <!-- TREE:START -->
-_Actualizado: 2026-04-26 10:07 UTC_
+_Actualizado: 2026-04-26 23:44 UTC_
 
 ```
 src/components/
@@ -24,11 +24,13 @@ src/components/
 ├── Modal.tsx
 ├── Model3DViewer.tsx
 ├── PeopleCounterViewer.tsx
+├── ProfileDropdown.tsx
 ├── ProjectDeviceExperience.tsx
 ├── ProjectModals.tsx
 ├── ProtectedRoute.tsx
 ├── RelatedTechnologies.tsx
 ├── ResearcherModals.tsx
+├── ResearcherProfileModal.tsx
 ├── SearchBar.tsx
 ├── SmartParkingViewer.tsx
 ├── TechLabPlatformViewer.tsx

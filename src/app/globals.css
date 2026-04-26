@@ -26,6 +26,8 @@
   --theme-border: #4b5563;
   --theme-card: #ffffff;
   --theme-accent: #2563eb;
+  --modal-bg: #ffffff;
+  --modal-inner-bg: #f1f5f9;
 }
 
 /* Tema oscuro */
@@ -36,6 +38,8 @@
   --theme-border: rgba(255, 255, 255, 0.2);
   --theme-card: rgba(15, 23, 42, 0.8);
   --theme-accent: #60a5fa;
+  --modal-bg: #0f172a;
+  --modal-inner-bg: rgba(30, 41, 59, 0.5);
 }
 
 @theme inline {
@@ -102,6 +106,15 @@ html {
 
 .modal-container::-webkit-scrollbar {
   display: none; /* WebKit */
+}
+
+/* Scrollbar oculto para el modal de perfil de investigador */
+.modal-no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.modal-no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Estilos específicos para modales - Fondo oscuro con texto claro */

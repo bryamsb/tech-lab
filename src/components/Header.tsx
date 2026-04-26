@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { LogOut, User, Shield, GraduationCap, Search, Eye, Menu, X, KeyRound, Cpu } from 'lucide-react';
+import { LogOut, User, Shield, GraduationCap, Search, Eye, Menu, X, KeyRound } from 'lucide-react';
 import { useAuth } from '@/contexts/SessionAuthContext';
 import ThemeToggle from './ThemeToggle';
 import { useState } from 'react';
 import Modal from './Modal';
+import ProfileDropdown from '@/components/ProfileDropdown';
 
 export default function Header() {
   const router = useRouter();
@@ -73,7 +74,6 @@ export default function Header() {
       <div className="container mx-auto flex flex-wrap items-center justify-between px-6 py-4">
         {/* Mobile Menu Button & Logo */}
         <div className="flex items-center gap-3">
-          {/* Hamburger Menu Button - Only visible on mobile */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-md text-theme-text hover:bg-theme-accent/10 transition-colors"
@@ -86,11 +86,7 @@ export default function Header() {
             )}
           </button>
 
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center transition-all hover:scale-105"
-          >
+          <Link href="/" className="flex items-center transition-all hover:scale-105">
             <svg
               className="h-8 w-8 text-neon-pink"
               fill="currentColor"
@@ -103,50 +99,15 @@ export default function Header() {
         </div>
 
         <nav className="hidden md:flex md:flex-wrap items-center gap-6">
-          <Link
-            className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap"
-            href="/"
-          >
-            Inicio
-          </Link>
-          <Link
-            className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap"
-            href="/inventory"
-          >
-            Inventario
-          </Link>
-          <Link
-            className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap"
-            href="/projects"
-          >
-            Proyectos
-          </Link>
-          <Link
-            className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap"
-            href="/researchers"
-          >
-            Investigadores
-          </Link>
-          <Link
-            className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap"
-            href="/loans"
-          >
-            Préstamos
-          </Link>
+          <Link className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap" href="/">Inicio</Link>
+          <Link className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap" href="/inventory">Inventario</Link>
+          <Link className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap" href="/projects">Proyectos</Link>
+          <Link className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap" href="/researchers">Investigadores</Link>
+          <Link className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap" href="/loans">Préstamos</Link>
           {profile?.role === 'admin' && (
-              <Link
-                className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap"
-                href="/admin/devices"
-              >
-                Dispositivos
-              </Link>
+            <Link className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap" href="/admin/devices">Dispositivos</Link>
           )}
-          <Link
-            className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap"
-            href="/contact"
-          >
-            Contacto
-          </Link>
+          <Link className="font-poppins text-sm font-medium text-theme-secondary transition-colors hover:text-theme-text whitespace-nowrap" href="/contact">Contacto</Link>
         </nav>
 
         <div className="flex items-center gap-4">
@@ -184,55 +145,14 @@ export default function Header() {
                 )}
               </div>
 
-              <div className="flex items-center gap-2 text-theme-text">
-                <div className="relative group">
-                  {profile?.avatar_url ? (
-                    <Image
-                      src={profile.avatar_url}
-                      alt={profile.full_name || profile.username || 'Usuario'}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8 rounded-full object-cover border-2 border-theme-accent/20 hover:border-theme-accent/50 transition-all cursor-pointer group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 bg-theme-accent/10 rounded-full flex items-center justify-center border-2 border-theme-accent/20 hover:border-theme-accent/50 transition-all cursor-pointer group-hover:scale-105">
-                      <User className="w-4 h-4 text-theme-accent" />
-                    </div>
-                  )}
-
-                  {/* Tooltip con información del usuario */}
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-2 py-1 bg-theme-card border border-theme-border rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 whitespace-nowrap">
-                    <p className="text-xs text-theme-text font-medium">
-                      {profile?.full_name || profile?.username}
-                    </p>
-                    <p className="text-xs text-theme-secondary">
-                      {profile?.email}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="hidden md:block">
-                  <span className="text-sm font-medium">
-                    {profile?.full_name || profile?.username}
-                  </span>
-                </div>
-              </div>
-              <div className="hidden md:flex items-center gap-3">
-                <button
-                  onClick={handleOpenPasswordModal}
-                  className="flex items-center gap-2 text-theme-secondary hover:text-theme-text transition-colors"
-                  title="Cambiar contraseña"
-                >
-                  <KeyRound className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 text-theme-secondary hover:text-theme-text transition-colors"
-                  title="Cerrar sesión"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </div>
+              {/* ProfileDropdown reemplaza el avatar+tooltip+botones del original */}
+              <ProfileDropdown
+                displayName={profile?.full_name || profile?.username || user?.email?.split('@')[0] || ''}
+                avatarUrl={profile?.avatar_url || ''}
+                email={profile?.email || ''}
+                onLogout={handleLogout}
+                onChangePassword={handleOpenPasswordModal}
+              />
             </div>
           ) : (
             <Link
@@ -249,178 +169,95 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-theme-card border-b border-theme-border">
           <div className="container mx-auto px-6 py-4 space-y-4">
-            {/* Navigation Links */}
             <div className="space-y-2">
-              <Link
-                href="/"
-                className="block py-2 text-theme-text hover:text-theme-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Inicio
-              </Link>
-              <Link
-                href="/inventory"
-                className="block py-2 text-theme-text hover:text-theme-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Inventario
-              </Link>
-              <Link
-                href="/projects"
-                className="block py-2 text-theme-text hover:text-theme-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Proyectos
-              </Link>
-              <Link
-                href="/researchers"
-                className="block py-2 text-theme-text hover:text-theme-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Investigadores
-              </Link>
-              <Link
-                href="/loans"
-                className="block py-2 text-theme-text hover:text-theme-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Préstamos
-              </Link>
+              <Link href="/" className="block py-2 text-theme-text hover:text-theme-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>Inicio</Link>
+              <Link href="/inventory" className="block py-2 text-theme-text hover:text-theme-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>Inventario</Link>
+              <Link href="/projects" className="block py-2 text-theme-text hover:text-theme-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>Proyectos</Link>
+              <Link href="/researchers" className="block py-2 text-theme-text hover:text-theme-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>Investigadores</Link>
+              <Link href="/loans" className="block py-2 text-theme-text hover:text-theme-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>Préstamos</Link>
               {profile?.role === 'admin' && (
-                <Link
-                  href="/admin/devices"
-                  className="block py-2 text-theme-text hover:text-theme-accent transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <Cpu className="w-4 h-4" />
-                    Dispositivos
-                  </span>
-                </Link>
+                <Link href="/admin/devices" className="block py-2 text-theme-text hover:text-theme-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>Dispositivos</Link>
               )}
-              <Link
-                href="/contact"
-                className="block py-2 text-theme-text hover:text-theme-accent transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Contacto
-              </Link>
+              <Link href="/contact" className="block py-2 text-theme-text hover:text-theme-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>Contacto</Link>
             </div>
-
-            {isAuthenticated && user ? (
-              <div className="pt-4 border-t border-theme-border">
+            {isAuthenticated && (
+              <div className="pt-2 border-t border-theme-border space-y-2">
                 <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    handleOpenPasswordModal();
-                  }}
-                  className="flex items-center gap-2 px-3 py-2 text-theme-text hover:text-theme-accent hover:bg-theme-accent/10 rounded-md transition-colors w-full justify-center mb-2"
+                  onClick={() => { setMobileMenuOpen(false); handleOpenPasswordModal(); }}
+                  className="flex items-center gap-2 py-2 text-theme-secondary hover:text-theme-text transition-colors w-full"
                 >
                   <KeyRound className="w-4 h-4" />
                   <span className="text-sm">Cambiar contraseña</span>
                 </button>
                 <button
-                  onClick={() => {
-                    handleLogout();
-                    setMobileMenuOpen(false);
-                  }}
-                  className="flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-md transition-colors w-full justify-center"
+                  onClick={() => { setMobileMenuOpen(false); handleLogout(); }}
+                  className="flex items-center gap-2 py-2 text-theme-secondary hover:text-theme-text transition-colors w-full"
                 >
                   <LogOut className="w-4 h-4" />
                   <span className="text-sm">Cerrar sesión</span>
                 </button>
-              </div>
-            ) : (
-              <div className="pt-4 border-t border-theme-border">
-                <Link
-                  href="/login"
-                  className="block px-4 py-2 bg-bright-blue text-dark-bg rounded-md font-medium hover:opacity-90 transition-opacity text-center"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Login
-                </Link>
               </div>
             )}
           </div>
         </div>
       )}
     </header>
-    <Modal
-      isOpen={showPasswordModal}
-      onClose={() => {
-        setShowPasswordModal(false);
-        resetPasswordForm();
-      }}
-      title="Cambiar contraseña"
-      size="sm"
-      className="bg-theme-card border border-theme-border text-theme-text"
-    >
-      <form onSubmit={handleChangePassword} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-theme-secondary mb-2">
-            Contraseña actual
-          </label>
-          <input
-            type="password"
-            required
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            className="w-full px-3 py-2 bg-theme-background border border-theme-border rounded-lg focus:ring-2 focus:ring-theme-accent text-theme-text"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-theme-secondary mb-2">
-            Nueva contraseña
-          </label>
-          <input
-            type="password"
-            required
-            minLength={6}
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full px-3 py-2 bg-theme-background border border-theme-border rounded-lg focus:ring-2 focus:ring-theme-accent text-theme-text"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-theme-secondary mb-2">
-            Confirmar nueva contraseña
-          </label>
-          <input
-            type="password"
-            required
-            minLength={6}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-3 py-2 bg-theme-background border border-theme-border rounded-lg focus:ring-2 focus:ring-theme-accent text-theme-text"
-          />
-        </div>
-        {passwordError && (
-          <p className="text-sm text-red-400">{passwordError}</p>
-        )}
-        {passwordSuccess && (
-          <p className="text-sm text-green-400">{passwordSuccess}</p>
-        )}
-        <div className="flex justify-end gap-3 pt-2">
-          <button
-            type="button"
-            onClick={() => {
-              setShowPasswordModal(false);
-              resetPasswordForm();
-            }}
-            className="px-4 py-2 rounded-lg border border-theme-border text-theme-text hover:bg-theme-accent/10 transition-colors"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            disabled={passwordSaving}
-            className="px-4 py-2 rounded-lg bg-theme-accent text-white hover:opacity-90 transition-opacity disabled:opacity-60"
-          >
-            {passwordSaving ? 'Guardando...' : 'Actualizar'}
-          </button>
-        </div>
-      </form>
-    </Modal>
+
+    {/* Modal Cambiar Contraseña */}
+    {showPasswordModal && (
+      <Modal isOpen={showPasswordModal} onClose={() => setShowPasswordModal(false)} title="Cambiar contraseña">
+        <form onSubmit={handleChangePassword} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-theme-text mb-1">Contraseña actual</label>
+            <input
+              type="password"
+              value={currentPassword}
+              onChange={e => setCurrentPassword(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg border border-theme-border bg-theme-card text-theme-text focus:outline-none focus:border-theme-accent"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-theme-text mb-1">Nueva contraseña</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg border border-theme-border bg-theme-card text-theme-text focus:outline-none focus:border-theme-accent"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-theme-text mb-1">Confirmar nueva contraseña</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg border border-theme-border bg-theme-card text-theme-text focus:outline-none focus:border-theme-accent"
+              required
+            />
+          </div>
+          {passwordError && <p className="text-sm text-red-400">{passwordError}</p>}
+          {passwordSuccess && <p className="text-sm text-green-400">{passwordSuccess}</p>}
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() => setShowPasswordModal(false)}
+              className="px-4 py-2 rounded-lg border border-theme-border text-theme-secondary hover:text-theme-text transition-colors"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={passwordSaving}
+              className="px-4 py-2 rounded-lg bg-theme-accent text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+            >
+              {passwordSaving ? 'Guardando...' : 'Guardar'}
+            </button>
+          </div>
+        </form>
+      </Modal>
+    )}
     </>
   );
 }

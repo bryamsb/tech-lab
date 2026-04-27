@@ -65,8 +65,7 @@ src/components/
 
 | Archivo | Estado | Descripcion |
 |---------|--------|-------------|
-| `EditProfileButton.tsx` | + nuevo | Boton que abre el modal de edicion |
-| `EditProfileModal.tsx` | + nuevo | Modal de cambio de informacion personal (sin scroll) |
+| `EditProfileModal.tsx` | * edita | quitar funcion de cambios realizados al modificar informacion dentro de modal |
 | `ProfilePage.tsx` | + nuevo | Pagina completa: ver, editar y guardar informacion (general, academico, universidad) |
 | `researchers/[id]/page.tsx` | ~ mueve | Integrar boton de edicion cuando el usuario es dueno del perfil |
 

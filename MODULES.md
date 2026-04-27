@@ -66,6 +66,8 @@ src/components/
 | Archivo | Estado | Descripcion |
 |---------|--------|-------------|
 | `EditProfileModal.tsx` | * edita | quitar funcion de cambios realizados al modificar informacion dentro de modal |
+| `EditProfileModal.tsx` | * edita | adaptar colores del boton guardar segun el theme dark o light mode de la página |
+| `EditProfileModal.tsx` | * edita | quitar scroll vertical en el light-mode, solo funcionando en dark mode |
 | `ProfilePage.tsx` | + nuevo | Pagina completa: ver, editar y guardar informacion (general, academico, universidad) |
 | `researchers/[id]/page.tsx` | ~ mueve | Integrar boton de edicion cuando el usuario es dueno del perfil |
 

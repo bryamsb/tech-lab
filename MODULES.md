@@ -67,7 +67,7 @@ src/components/
 |---------|--------|-------------|
 | `ProfileDropdown.tsx` | * edita | adaptar colores del boton guardar segun el theme dark o light mode de la página |
 | `ProfilePage.tsx` | + nuevo | Pagina completa: ver, editar y guardar informacion (general, academico, universidad) |
-| `researchers/[id]/page.tsx` | ~ mueve | Integrar boton de edicion cuando el usuario es dueno del perfil |
+| `researchers/[id]/page.tsx` | * editar | Integrar boton de edicion cuando el usuario es dueno del perfil |
 
 Acceso: editable solo por el propio usuario y por admin.
 
